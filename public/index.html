@@ -6,8 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
      <p>Welcome to chat app</p>   
-     
+     <script src="/socket.io/socket.io.js" ></script>
+     <script >
+      
+            var socket=io()
+            socket.on('connect',()=>
+            {
+                console.log('Server is connected'); 
+            });
+            socket.on('disconnect',()=>
+            {
+                console.log('Server is disconnected'); 
+            })
+      
+      
+     </script>
 </body>
 </html>
