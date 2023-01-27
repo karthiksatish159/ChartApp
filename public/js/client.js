@@ -34,3 +34,20 @@ socket.on('newMessage',function(value)
     const ul=document.querySelector("ul");
     ul.appendChild(li);
 })
+socket.on('joined',function(message)
+{
+    const li=document.createElement("li");
+    const Text=document.createTextNode(message.msg);
+    li.appendChild(Text);
+    const ul=document.querySelector("ul");
+    ul.appendChild(li);
+})
+socket.on('welcome',function(message)
+{
+    const li=document.createElement("li");
+    const Text=document.createTextNode(message.msg);
+    li.appendChild(Text);
+    const ul=document.querySelector("ul");
+    ul.appendChild(li);
+})
+
