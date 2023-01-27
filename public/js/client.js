@@ -34,18 +34,11 @@ socket.on('newMessage',function(value)
     const ul=document.querySelector("ul");
     ul.appendChild(li);
 })
-socket.on('joined',function(message)
+
+socket.on('user_removed',function(message)
 {
     const li=document.createElement("li");
-    const Text=document.createTextNode(message.msg);
-    li.appendChild(Text);
-    const ul=document.querySelector("ul");
-    ul.appendChild(li);
-})
-socket.on('welcome',function(message)
-{
-    const li=document.createElement("li");
-    const Text=document.createTextNode(message.msg);
+    const Text=document.createTextNode(message);
     li.appendChild(Text);
     const ul=document.querySelector("ul");
     ul.appendChild(li);
