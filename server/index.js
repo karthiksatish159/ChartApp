@@ -8,6 +8,7 @@ const server=app.listen(port,()=>{console.log(`Server is running on ${port}`)})
 const io=socketIO(server);
 io.on('connection',(socket)=>
 {
+    
     console.log(`New user is connected ${socket.id}`);
     socket.broadcast.emit('joined',{msg:`${socket.id}@gmail.com was joined`});
     socket.emit('welcome',{msg:`Welcome ${socket.id}@gmail.com from admin`})
