@@ -6,7 +6,7 @@ const socketIO=require('socket.io');
 const app=express();
 const server=app.listen(port,()=>{console.log(`Server is running on ${port}`)})
 const io=socketIO(server);
-const {genrateMessage}=require('./utils/message')
+const {genrateMessage,genrateLocationMessage}=require('./utils/message')
 io.on('connection',(socket)=>
 {
     
@@ -46,6 +46,11 @@ io.on('connection',(socket)=>
                 createdAt:hoursIST+":"+minutesIST
             })*/
         }
+    
+    })
+    socket.on('createLocation',(coords)=>
+    {
+        socket.emit('newLocationMessage',genrateLocationMessage(socket.id+"@gmail.com",coords));
     })
     socket.on('disconnect',()=>
     {

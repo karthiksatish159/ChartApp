@@ -29,13 +29,25 @@ $("#btn").on('click',function(e)
         }
     });
 })
+$('#location').on('click',function()
+{
+    navigator.geolocation.getCurrentPosition(function(data)
+    {
+        socket.emit('createLocation',{lat:data.coords.latitude,lng:data.coords.longitude});
+    },
+  function(error){ return alert(`Unable to fetch information`)})
+})
 socket.on('newMessage',function(value)
 {
     const li=$('<li></li>');
     li.text(`from: ${value.from} message: ${JSON.stringify(value.message)}`)
     $('#messages').append(li);
 })
-
+socket.on('newLocationMessage',function(value)
+{
+    const li=$(`<li>from:${value.from} <a target='blank' href=${JSON.stringify(value.url)}>click me</a> createdAt:${value.createdAt}</li>`);
+    $('#messages').append(li);
+})
 socket.on('user_removed',function(message)
 {
     const li=$('<li style="color:green"></li>');
