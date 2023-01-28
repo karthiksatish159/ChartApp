@@ -24,7 +24,18 @@ let btn=document.getElementById("btn");
 console.log(btn)
 btn.addEventListener('click',function(e)
 {
-    socket.emit('createMessage',{msg:document.getElementById('name').value});
+    socket.emit('createMessage',{msg:document.getElementById('name').value},function(value)
+    {
+        if(value.error)
+        {
+            const li=document.createElement("li");
+            const Text=document.createTextNode(JSON.stringify(value));
+            li.appendChild(Text);
+            li.style.color ="red";
+            const ul=document.querySelector("ul");
+            ul.appendChild(li);
+        }
+    });
 })
 socket.on('newMessage',function(value)
 {

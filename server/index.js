@@ -18,17 +18,27 @@ io.on('connection',(socket)=>
         let newEmail=socket.id+"@gmail.com";
         socket.emit('newEmail',{email:newEmail});
     })
-    socket.on('createMessage',(message)=>
+    socket.on('createMessage',(message,cb)=>
     {
-        //* So here we sending the message to all the clients including the who sent msg
-        io.emit('newMessage',genrateMessage(socket.id+"@gmail.com",message.msg))
-        //* So here we sending the message to all the clients exculding the who sent msg for that we are using boardcasting
-       /* socket.broadcast.emit('newMessage',
+        console.log(message.msg.length)
+        if(message.msg.length ===0)
         {
-            from:socket.id+"@gmail.com",
-            text:msg.msg,
-            createdAt:hoursIST+":"+minutesIST
-        })*/
+            cb({error:true,msg:'send the data correctly'});
+            return;
+        } 
+        else
+        {
+            cb({error:false,msg:'perfect'});
+            //* So here we sending the message to all the clients including the who sent msg
+            io.emit('newMessage',genrateMessage(socket.id+"@gmail.com",message.msg))
+            //* So here we sending the message to all the clients exculding the who sent msg for that we are using boardcasting
+           /* socket.broadcast.emit('newMessage',
+            {
+                from:socket.id+"@gmail.com",
+                text:msg.msg,
+                createdAt:hoursIST+":"+minutesIST
+            })*/
+        }
     })
     socket.on('disconnect',()=>
     {
