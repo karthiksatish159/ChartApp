@@ -11,8 +11,11 @@ io.on('connection',(socket)=>
 {
     
     console.log(`New user is connected ${socket.id}`);
-    socket.broadcast.emit('newMessage',`${socket.id}@gmail.com was joined`); //* Here we are sending the joined alert to reaming user except the user who joined by the boardcast thing so here by socket object  we getting that id of joined user by that it will know that this the user we have not to send the response.
-    socket.emit('newMessage',`Welcome ${socket.id}@gmail.com from admin`) //* This message is for that specific user you have to recoginze that if i go with socket object it means it's related to that user
+    socket.broadcast.emit('newMessage',{from:"admin",message:`${socket.id}@gmail.com was joined`}); //* Here we are sending the joined alert to reaming user except the user who joined by the boardcast thing so here by socket object  we getting that id of joined user by that it will know that this the user we have not to send the response.
+    socket.emit('newMessage',{
+        from:"admin",
+        message:`Welcome ${socket.id}@gmail.com from admin`
+    }) //* This message is for that specific user you have to recoginze that if i go with socket object it means it's related to that user
     socket.on('giveEmail',()=>
     {
         let newEmail=socket.id+"@gmail.com";
@@ -30,7 +33,11 @@ io.on('connection',(socket)=>
         {
             cb({error:false,msg:'perfect'});
             //* So here we sending the message to all the clients including the who sent msg
-            io.emit('newMessage',genrateMessage(socket.id+"@gmail.com",message.msg))
+            io.emit('newMessage',
+            {
+                from:socket.id+"@gmail.com",
+                message:genrateMessage(socket.id+"@gmail.com",message.msg),
+            })
             //* So here we sending the message to all the clients exculding the who sent msg for that we are using boardcasting
            /* socket.broadcast.emit('newMessage',
             {

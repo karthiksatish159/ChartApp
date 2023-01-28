@@ -13,45 +13,33 @@ socket.on('disconnect',function()
 socket.emit('giveEmail');
 socket.on('newEmail',function(res)
 {
-    const paragraph=document.createElement("p");
-    const node=document.createTextNode(`There is your email ${res.email}`);
-    paragraph.appendChild(node);
-    const element=document.getElementById("KS");
-    element.appendChild(paragraph);
-    console.log(`There is your email ${res.email}`);
+    const paragraph=$('<p></p>');
+    paragraph.text(`There is your email ${res.email}`)
+    $('#KS').append(paragraph);
 })
-let btn=document.getElementById("btn");
-console.log(btn)
-btn.addEventListener('click',function(e)
+$("#btn").on('click',function(e)
 {
-    socket.emit('createMessage',{msg:document.getElementById('name').value},function(value)
+    socket.emit('createMessage',{msg:$('[name=message]').val()},function(value)
     {
         if(value.error)
         {
-            const li=document.createElement("li");
-            const Text=document.createTextNode(JSON.stringify(value));
-            li.appendChild(Text);
-            li.style.color ="red";
-            const ul=document.querySelector("ul");
-            ul.appendChild(li);
+            const li=$('<li style="color:red"></li>');
+            li.text(`${JSON.stringify(value)}`);
+            $('#messages').append(li)
         }
     });
 })
 socket.on('newMessage',function(value)
 {
-    const li=document.createElement("li");
-    const Text=document.createTextNode(JSON.stringify(value));
-    li.appendChild(Text);
-    const ul=document.querySelector("ul");
-    ul.appendChild(li);
+    const li=$('<li></li>');
+    li.text(`from: ${value.from} message: ${JSON.stringify(value.message)}`)
+    $('#messages').append(li);
 })
 
 socket.on('user_removed',function(message)
 {
-    const li=document.createElement("li");
-    const Text=document.createTextNode(message);
-    li.appendChild(Text);
-    const ul=document.querySelector("ul");
-    ul.appendChild(li);
+    const li=$('<li style="color:green"></li>');
+    li.text(message);
+    $('#messages').append(li);
 })
 
