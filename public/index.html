@@ -7,18 +7,26 @@
     <title>Document</title>
     <script src="/socket.io/socket.io.js" ></script>
     <script defer src="./js/client.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<body>
-     <p id="KS">Welcome to chat app</p>   
-      <br>
-      <input type="text"  name="message" id="name">
-      <input type="button" value="send location" id="location">
-      <input type="button" value="click me" id="btn"><br>
-      <ol id="messages">
-        
-      </ol>
+<body class="chat">
+    <div class="chat__sidebar">
+        <h3>People</h3>
+        <div id="users"></div>
+    </div>
+    <div class="chat__main">
+        <ol id="messages" class="chat__messages"></ol>
+        <div class="chat__footer">
+            <form id="message-form" method="post">
+                <input type="text"  name="message" placeholder="messsage" autofocus autocomplete="off">
+                <button>Send</button>
+            </form>
+            <button id="send-location">Send location</button>
+        </div> 
+    </div>
+
       
 </body>
 </html>

@@ -11,15 +11,17 @@ socket.on('disconnect',function()
 })
 //Client asking a email
 socket.emit('giveEmail');
-socket.on('newEmail',function(res)
+// socket.on('newEmail',function(res)
+// {
+//     const paragraph=$('<p></p>');
+//     paragraph.text(`There is your email ${res.email}`)
+//     $('#KS').append(paragraph);
+// })
+$("#message-form").on('submit',function(e)
 {
-    const paragraph=$('<p></p>');
-    paragraph.text(`There is your email ${res.email}`)
-    $('#KS').append(paragraph);
-})
-$("#btn").on('click',function(e)
-{
-    socket.emit('createMessage',{msg:$('[name=message]').val()},function(value)
+    e.preventDefault();
+    let messageTextBox=$('[name=message]');
+    socket.emit('createMessage',{msg:messageTextBox.val()},function(value)
     {
         if(value.error)
         {
@@ -27,15 +29,29 @@ $("#btn").on('click',function(e)
             li.text(`${JSON.stringify(value)}`);
             $('#messages').append(li)
         }
+        else
+        {
+            messageTextBox.val('');
+        }
     });
 })
-$('#location').on('click',function()
+let locationButton=$('#send-location');
+locationButton.on('click',function()
 {
+    if(!navigator.geolocation)
+    {
+        return alert('Gelocation is not supported by your browser');
+    }
+    locationButton.attr('disabled','disabled').text('sending location ....');
+
     navigator.geolocation.getCurrentPosition(function(data)
     {
+        locationButton.removeAttr('disabled').text('Send location');
         socket.emit('createLocation',{lat:data.coords.latitude,lng:data.coords.longitude});
     },
-  function(error){ return alert(`Unable to fetch information`)})
+  function(){ 
+    locationButton.removeAttr('disabled');
+    return alert(`Unable to fetch information`)})
 })
 socket.on('newMessage',function(value)
 {
