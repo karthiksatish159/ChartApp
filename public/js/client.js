@@ -55,15 +55,32 @@ locationButton.on('click',function()
 })
 socket.on('newMessage',function(value)
 {
-    const li=$('<li></li>');
-    console.log(value);
-    li.text(`${value.message.from} : ${value.message.text}`)
-    $('#messages').append(li);
+    // const li=$('<li></li>');
+    // li.text(`${value.message.from} ${formatedTime}  : ${value.message.text}`)
+    // $('#messages').append(li);
+    let formatedTime=moment(value.message.createdAt).format('LT');
+    let template=$('#message-template').html();
+    let html=Mustache.render(template,
+        {
+            text:value.message.text,
+            from:value.message.from,
+            createdAt:formatedTime      
+        })
+    $("#messages").append(html);
 })
 socket.on('newLocationMessage',function(value)
 {
-    const li=$(`<li>from:${value.from} <a target='blank' href=${JSON.stringify(value.url)}>click me</a> createdAt:${value.createdAt}</li>`);
-    $('#messages').append(li);
+    // const li=$(`<li>from:${value.from} ${formatedTime}  <a target='blank' href=${JSON.stringify(value.url)}>click me</a> createdAt:${value.createdAt}</li>`);
+    // $('#messages').append(li);
+    let template=$("#location-message-template").html();
+    let formatedTime=moment(value.createdAt).format('LT');
+    let html=Mustache.render(template,
+        {
+            from:value.from,
+            url:value.url,
+            createdAt:formatedTime
+        })
+        $('#messages').append(html);
 })
 socket.on('user_removed',function(message)
 {

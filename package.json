@@ -4,7 +4,7 @@
   "description": "this is a chat app",
   "main": "index.js",
   "scripts": {
-    "test":"jest",
+    "test": "jest",
     "test-watch": "nodemon --exec 'npm test'",
     "start": "nodemon server/index.js"
   },
@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/socket.io": "^3.0.2",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "jest": "^29.4.1",
