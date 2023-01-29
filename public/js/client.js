@@ -56,7 +56,8 @@ locationButton.on('click',function()
 socket.on('newMessage',function(value)
 {
     const li=$('<li></li>');
-    li.text(`from: ${value.from} message: ${JSON.stringify(value.message)}`)
+    console.log(value);
+    li.text(`${value.message.from} : ${value.message.text}`)
     $('#messages').append(li);
 })
 socket.on('newLocationMessage',function(value)
