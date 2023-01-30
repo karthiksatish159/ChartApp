@@ -5,9 +5,9 @@
 </ol>
 <h3>Libraries i was used to develop this application</h3>
 <ol>
-    <li>1.Express</li>
-    <li>2.Socket.io</li>
-    <li>3.jest</li>
-    <li>4.moment</li>
-    <li>5.mustache</li>
+    <li>Express</li>
+    <li>Socket.io</li>
+    <li>jest</li>
+    <li>moment</li>
+    <li>mustache</li>
 </ol>
