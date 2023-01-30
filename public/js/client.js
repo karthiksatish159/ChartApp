@@ -3,6 +3,19 @@ const socket=io('ws://localhost:3000')
 //Because it is Es6 thing it will work fine in chrome browser if we go with out-dated browser like internetExploer it might get crash
 socket.on('connect',function()
 {
+    let params=$.deparam(location.search);
+    socket.emit('join',params,function(err)
+    {
+        if(err)
+        {
+            alert(err);
+            location.href='/';
+        }
+        else
+        {
+            console.log("Everything is fine");
+        }
+    })
     console.log('Server is connected'); 
 });
 socket.on('disconnect',function()
@@ -25,14 +38,6 @@ socket.on('disconnect',function()
 //         messages.scrollTop(scrollHeight);
 //     }
 // }
-//Client asking a email
-socket.emit('giveEmail');
-// socket.on('newEmail',function(res)
-// {
-//     const paragraph=$('<p></p>');
-//     paragraph.text(`There is your email ${res.email}`)
-//     $('#KS').append(paragraph);
-// })
 $("#message-form").on('submit',function(e)
 {
     e.preventDefault();
