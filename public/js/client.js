@@ -76,6 +76,7 @@ locationButton.on('click',function()
 })
 socket.on('newMessage',function(value)
 {
+    console.log(value)
     // const li=$('<li></li>');
     // li.text(`${value.message.from} ${formatedTime}  : ${value.message.text}`)
     // $('#messages').append(li);
@@ -104,10 +105,14 @@ socket.on('newLocationMessage',function(value)
         })
         $('#messages').append(html);
 })
-socket.on('user_removed',function(message)
+socket.on('updateUserList',(users)=>
 {
-    const li=$('<li style="color:green"></li>');
-    li.text(message);
-    $('#messages').append(li);
+    let ol=$('<ol></ol>');
+    console.log(users);
+    users.forEach(element => 
+        {
+            ol.append($('<li></li>').text(element))
+        });
+        $('#users').html(ol);
 })
 
