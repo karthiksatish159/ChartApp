@@ -9,6 +9,22 @@ socket.on('disconnect',function()
 {
     console.log('Server is disconnected'); 
 })
+// function scrollToBottom()
+// {
+//     //Selectors
+//     let messages=$('.messages');
+//     let newMessages=messages.childern('li:last-child');
+//     //Height
+//     let clientHeight=messages.prop('clientHeight');
+//     let scrollTop=messages.prop('scrollTop');
+//     let scrollHeight=messages.prop('scrollHeight');
+//     let newMessageHeight=newMessages.innerHeight();
+//     let lastMessageHeight=newMessages.prev().innerHeight();
+//     if(clientHeight+scrollTop+newMessageHeight+lastMessageHeight>=scrollHeight)
+//     {
+//         messages.scrollTop(scrollHeight);
+//     }
+// }
 //Client asking a email
 socket.emit('giveEmail');
 // socket.on('newEmail',function(res)
@@ -67,6 +83,7 @@ socket.on('newMessage',function(value)
             createdAt:formatedTime      
         })
     $("#messages").append(html);
+   
 })
 socket.on('newLocationMessage',function(value)
 {

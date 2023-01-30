@@ -55,5 +55,6 @@ io.on('connection',(socket)=>
         console.log(`User was disconnected ${socket.id}`);
     })
 })
+
 app.use(express.static(publicPath));
 
