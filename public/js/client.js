@@ -1,4 +1,4 @@
-const socket=io('ws://localhost:3000')
+ const socket=io('ws://localhost:3000')
 //In clientJs you better go with normal syntax of function instead of going with the arrow function 
 //Because it is Es6 thing it will work fine in chrome browser if we go with out-dated browser like internetExploer it might get crash
 socket.on('connect',function()

@@ -167,6 +167,21 @@
     font-weight: 600;
     margin-right: 10px;
   }
+  .public_rooms 
+  {
+    margin-left: 500px;
+    margin-bottom: 350px;
+  }
+  .button12 {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #7aa8b7;
+    border-radius: 6px;
+    outline: none;
+  }
   
   .message__title span {
     color: #999;

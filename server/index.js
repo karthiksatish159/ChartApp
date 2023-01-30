@@ -12,8 +12,8 @@ const {Users}=require('./utils/User');
 let user=new Users();
 io.on('connection',(socket)=>
 {
-    
     console.log(`New user is connected ${socket.id}`);
+    socket.emit('getRooms',user.isAliveRooms());
     socket.on('join',(params,cb)=>
     {
         if(!isString(params.name)||!isString(params.room))

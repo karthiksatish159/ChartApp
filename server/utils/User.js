@@ -28,6 +28,20 @@ class Users
     {
        return this.user.delete(id);
     }
+    isAliveRooms()
+    {
+        let rooms_list=new Set();
+        for(let [key,value] of this.user)
+        {
+            rooms_list.add(value.room);
+        }
+  let rooms=[];
+  for(let i of rooms_list)
+  {
+    rooms.push(i);
+  }
+        return rooms;
+    }
 
 }
 module.exports={Users};

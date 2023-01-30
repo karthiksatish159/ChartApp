@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join | chat app</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/socket.io/socket.io.js" ></script>
+    <script defer type="module" src="./js/room.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="centered-form">
@@ -22,6 +25,9 @@
                 <div class="form-field"><button>Join</button></div>
             </form>
         </div>
-        
+       <div class="public_rooms">
+            <h1>Public avliable rooms</h1>
+            <ol id="public"></ol>
+       </div>
 </body>
 </html>
