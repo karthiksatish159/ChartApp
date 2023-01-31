@@ -24,7 +24,7 @@ I want to describe this application breif
 -> So here in this application is not connected to database yet 
 -> This is inspired from online games thing
 </p>
-<h3>Follow of application</h3>
+<h3>Flow of application</h3>
 <ul>
 <li>So first after running the application you land into index.html page here you have to options those are create room and join room thing</li>
 <li>If you want through create room so here you have two thing those are create a new room entrying your name in under input field and you can create public or private.</li>
