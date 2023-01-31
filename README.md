@@ -27,7 +27,7 @@ I want to describe this application breif <br>
 <h3>Flow of application</h3>
 <ul>
 <li>So first after running the application you land into index.html page here you have to options those are create room and join room thing</li>
-<li>If you want through create room so here you have two thing those are create a new room entrying your name in under input field and you can create public or private.</li>
+<li>If you went through create room so here you have two thing those are create a new room entrying your name in under input field and you can create public or private.</li>
 <li>After clicking the create room you get alter message in that you have to copy the room_id and give to your frnds who want to join</li>
 <li>And one more right side of page you can see avaliable public rooms if you create one room which is not private it will visible to new user</li>
 <li>So new user can directly clicking on that avalible rooms and join in your thing</li>
