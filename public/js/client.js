@@ -80,7 +80,7 @@ locationButton.on('click',function()
 })
 socket.on('newMessage',function(value)
 {
-    console.log(value)
+
     // const li=$('<li></li>');
     // li.text(`${value.message.from} ${formatedTime}  : ${value.message.text}`)
     // $('#messages').append(li);
@@ -112,7 +112,6 @@ socket.on('newLocationMessage',function(value)
 socket.on('updateUserList',(users)=>
 {
     let ol=$('<ol></ol>');
-    console.log(users);
     users.forEach(element => 
         {
             ol.append($('<li></li>').text(element))
@@ -134,7 +133,6 @@ socket.on('roomsAvliable',(data)=>
 {
     let ol=$('#rooms');
     ol.html('');
-    console.log(data);
     for(let i of data)
     {
         ol.append(`<li>${i}</li>`)
@@ -145,7 +143,6 @@ socket.emit('getRooms',{},function(data)
 {
     let ol=$('#rooms');
     ol.html('');
-    console.log(data);
     for(let i of data)
     {
         ol.append(`<li>${i}</li>`)
