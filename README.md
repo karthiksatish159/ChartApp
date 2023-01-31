@@ -20,8 +20,8 @@
 <li>To run the test cases npm run test</li>
 </ol>
 <p>
-I want to describe this application breif 
--> So here in this application is not connected to database yet 
+I want to describe this application breif <br>
+-> So here in this application is not connected to database yet <br>
 -> This is inspired from online games thing
 </p>
 <h3>Flow of application</h3>
