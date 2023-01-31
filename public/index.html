@@ -9,18 +9,15 @@
 </head>
 <body class="centered-form">
         <div class="centered-form__form">
-            <form action="./chat.html">
-                <div class="form-field"><h3>Join a chat</h3></div>
-                <div class="form-field">
-                    <label for="">Display name</label>
-                    <input type="text" name="name" autofocus />
-                </div>
-                <div class="form-field">
-                    <label for="">Room name</label>
-                    <input type="text" name="room">
-                </div>
-                <div class="form-field"><button>Join</button></div>
+            <form action="./rooms.html" >
+                <input type="text" name="flag" value="1" hidden />
+                <div class="form-field" id="create"><button>Create room</button></div>
             </form>
+            <form action="./join.html" >
+                <input type="text" name="flag" value="2" hidden />
+                <div class="form-field" id="join"><button>Join</button></div>
+            </form>
+         
         </div>
         
 </body>

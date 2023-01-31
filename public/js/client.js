@@ -4,18 +4,22 @@ const socket=io('ws://localhost:3000')
 socket.on('connect',function()
 {
     let params=$.deparam(location.search);
-    socket.emit('join',params,function(err)
+    if(params.name&&params.room)
     {
-        if(err)
+        socket.emit('join',params,function(err)
         {
-            alert(err);
-            location.href='/';
-        }
-        else
-        {
-            console.log("Everything is fine");
-        }
-    })
+            if(err)
+            {
+                alert(err);
+                location.href='/';
+            }
+            else
+            {
+                console.log("Everything is fine");
+            }
+        })
+    }
+
     console.log('Server is connected'); 
 });
 socket.on('disconnect',function()
@@ -115,4 +119,78 @@ socket.on('updateUserList',(users)=>
         });
         $('#users').html(ol);
 })
+function myFunction()
+{
+
+    let params=$.deparam(location.search);
+    if(params.flag==1)
+    {
+        let element=$(` <br> <input type="checkbox" id="roomType" name="roomType" value="Bike"> <label for="roomType"> Make private</label><br>`)
+        element.insertBefore("#btn123")
+        $('#btn').text('create room')
+    }
+}
+socket.on('roomsAvliable',(data)=>
+{
+    let ol=$('#rooms');
+    ol.html('');
+    console.log(data);
+    for(let i of data)
+    {
+        ol.append(`<li>${i}</li>`)
+        ol.append(`<a class="but" href="#">join</a>`)
+    }
+})
+socket.emit('getRooms',{},function(data)
+{
+    let ol=$('#rooms');
+    ol.html('');
+    console.log(data);
+    for(let i of data)
+    {
+        ol.append(`<li>${i}</li>`)
+        ol.append(`<a class="but" href="./rooms2.html?room-id=${i}">join</a>`)
+    }
+})
+$('#form2').on('submit',function(e)
+{
+    e.preventDefault();
+    let params=$.deparam(location.search);
+    location.href=`./chat.html?name=${$('#username').val()}&room=${params["room-id"]}`
+})
+$('#form').on('submit',function(e)
+{
+    e.preventDefault();
+    let params=$.deparam(location.search);
+    if(params.flag==1)
+    {
+        //Here give a emit i.e create room in server side we have to generate a room-id and create a room and send ack
+        socket.emit('createRoom',$('#roomType')[0].checked,function(value)
+        {
+            alert("'Copy the room_id': "+value.room_id);
+           location.href=`./chat.html?name=${$('#name').val()}&room=${value.room_id}`
+        })
+    }
+   
+})
+$('#form3').on('submit',function(e)
+{
+ 
+    e.preventDefault();
+    let room_id=$('#room_idJoin').val();
+    socket.emit('isRoomExist',{room_id},function(value)
+    {
+        if(!value)
+        {
+            location.href=`./chat.html?name=${$('#nameJoin').val()}&room=${room_id}`
+        }
+        else
+        {
+            location.href='/';
+        }
+    })
+
+})
+
+
 

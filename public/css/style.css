@@ -171,7 +171,24 @@
   .message__title span {
     color: #999;
   }
-  
+  .rooms_avaliable
+  {
+    position:relative;
+    left: 500px;
+    bottom: 250px;
+  }
+  .but {
+    display: block;
+    width: 70px;
+    height: 25px;
+    background: #4E9CAF;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+}
   @media (max-width: 600px) {
     * {
       font-size: 1rem;

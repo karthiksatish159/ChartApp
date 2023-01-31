@@ -9,11 +9,30 @@ const io=socketIO(server);
 const {genrateMessage,genrateLocationMessage}=require('./utils/message')
 const {isString}=require('./utils/validator');
 const {Users}=require('./utils/User');
+const {Room}=require('./utils/Rooms');
+const {generateOTP}=require('./utils/generateOtp')
 let user=new Users();
+let roomMap=new Room();
 io.on('connection',(socket)=>
 {
     
     console.log(`New user is connected ${socket.id}`);
+    socket.on('getRooms',(value,cb)=>
+    {
+        cb(roomMap.getRoomsList());
+    })
+    socket.on('createRoom',(value,cb)=>
+    {
+        let otp="hw"+generateOTP();
+        roomMap.setRoom(otp,value);
+        cb({room_id:otp});
+        console.log("5d6s5ds6d5s6d5s6d5s6d565")
+        socket.emit('roomsAvliable',roomMap.getRoomsList())
+    })
+    socket.on('isRoomExist',(value,cb)=>
+    {
+       cb(typeof roomMap.getRoom(value)==='undefined') 
+    })
     socket.on('join',(params,cb)=>
     {
         if(!isString(params.name)||!isString(params.room))
@@ -21,6 +40,7 @@ io.on('connection',(socket)=>
            return cb('Give the name of you and room-id properly');
         }
         socket.join(params.room);
+        io.emit('roomsAvliable',roomMap.getRoomsList())
         user.removeUser(socket.id);
         user.addUser(socket.id,params.name,params.room);
         io.to(params.room).emit('updateUserList',user.getUserList(params.room))
