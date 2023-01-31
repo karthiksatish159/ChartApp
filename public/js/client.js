@@ -178,8 +178,11 @@ $('#form3').on('submit',function(e)
  
     e.preventDefault();
     let room_id=$('#room_idJoin').val();
+
+
     socket.emit('isRoomExist',{room_id},function(value)
     {
+      
         if(!value)
         {
             location.href=`./chat.html?name=${$('#nameJoin').val()}&room=${room_id}`

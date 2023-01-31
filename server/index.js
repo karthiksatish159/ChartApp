@@ -31,7 +31,7 @@ io.on('connection',(socket)=>
     })
     socket.on('isRoomExist',(value,cb)=>
     {
-       cb(typeof roomMap.getRoom(value)==='undefined') 
+       cb(typeof roomMap.getRoom(value.room_id)==='undefined') 
     })
     socket.on('join',(params,cb)=>
     {
