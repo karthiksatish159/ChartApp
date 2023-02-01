@@ -34,6 +34,7 @@ I want to describe this application breif <br>
 <li>If you go with private those are not visible in the list you have to join by clicking the join button in landing page</li>
 <li>So in landing there is button called join it was for both public and private rooms so after clicking that your navigate to room configure page</li>
 <li>So in this page you have to enter the your name and id of room and you can join and do the chat</li>
+<li>So per room you can join upto 5 users only if you are more than that it will give an alert for youy</li>
 </ul>
 <p>If you are new to the socket.io if never listen this word you better to go with some tutorials</p>
 
