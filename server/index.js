@@ -26,12 +26,28 @@ io.on('connection',(socket)=>
         let otp="hw"+generateOTP();
         roomMap.setRoom(otp,value);
         cb({room_id:otp});
-        console.log("5d6s5ds6d5s6d5s6d5s6d565")
         socket.emit('roomsAvliable',roomMap.getRoomsList())
     })
     socket.on('isRoomExist',(value,cb)=>
     {
        cb(typeof roomMap.getRoom(value.room_id)==='undefined') 
+    })
+    socket.on('getRoomSize',(value,cb)=>
+    {
+        io.in(value).allSockets()
+        .then(result=>
+        {
+            console.log(value)
+            console.log(result)
+           if(result.size>=5)
+           {
+            cb(true)
+           }
+           else
+           {
+                cb(false);
+           }
+        })
     })
     socket.on('join',(params,cb)=>
     {
@@ -40,6 +56,8 @@ io.on('connection',(socket)=>
            return cb('Give the name of you and room-id properly');
         }
         socket.join(params.room);
+        io.in(params.room).allSockets().then(result=>{
+            console.log(result.size) })
         io.emit('roomsAvliable',roomMap.getRoomsList())
         user.removeUser(socket.id);
         user.addUser(socket.id,params.name,params.room);
@@ -90,8 +108,11 @@ io.on('connection',(socket)=>
     socket.on('disconnect',()=>
     {
         let respectedUser=user.getUser(socket.id);
+     
         if(user.removeUser(socket.id))
         {
+            io.in(respectedUser.room).allSockets().then(result=>{
+                console.log(result.size) })
             io.to(respectedUser.room).emit('updateUserList',user.getUserList(respectedUser.room))
             io.to(respectedUser.room).emit('newMessage', {message:genrateMessage("Admin",`${respectedUser.user_name} has left.`)});
         }

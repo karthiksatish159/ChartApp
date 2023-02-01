@@ -153,7 +153,19 @@ $('#form2').on('submit',function(e)
 {
     e.preventDefault();
     let params=$.deparam(location.search);
-    location.href=`./chat.html?name=${$('#username').val()}&room=${params["room-id"]}`
+    socket.emit('getRoomSize',params["room-id"],function(IsroomFull)
+    {
+            if(IsroomFull)
+            {
+                alert('Room is full');
+                location.href='/';
+            }
+            else
+            {
+                location.href=`./chat.html?name=${$('#username').val()}&room=${params["room-id"]}`
+            }
+    });
+
 })
 $('#form').on('submit',function(e)
 {
@@ -179,10 +191,21 @@ $('#form3').on('submit',function(e)
 
     socket.emit('isRoomExist',{room_id},function(value)
     {
-      
+
         if(!value)
         {
-            location.href=`./chat.html?name=${$('#nameJoin').val()}&room=${room_id}`
+            socket.emit('getRoomSize',room_id,function(IsroomFull)
+            {
+                    if(IsroomFull)
+                    {
+                        alert('Room is full');
+                        location.href='/';
+                    }
+                    else
+                    {
+                        location.href=`./chat.html?name=${$('#nameJoin').val()}&room=${room_id}`
+                    }
+            });
         }
         else
         {
